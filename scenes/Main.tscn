@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=1]
-[ext_resource path="res://assets/player/character_0000.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 
 [node name="Node" type="Node"]
 
@@ -11,12 +11,7 @@ cell_size = Vector2( 18, 18 )
 format = 1
 tile_data = PoolIntArray( 131063, 1, 0, 131064, 1, 0, 131065, 1, 0, 131066, 1, 0, 131067, 1, 0, 131068, 1, 0, 131069, 1, 0, 131070, 1, 0, 131071, 1, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0 )
 
-[node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( -132, 32 )
-
-[node name="Sprite" type="Sprite" parent="Player"]
-position = Vector2( 13, -26 )
-texture = ExtResource( 2 )
+[node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
