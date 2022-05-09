@@ -1,16 +1,20 @@
 extends KinematicBody2D
 
+var gravity: int = 400
+var velocity: Vector2 = Vector2.ZERO
+var maxHorizontalSpeed: int = 100
+var jumpSpeed: int = 180
+var movePlayerVector: Vector2 = Vector2.ZERO
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func _process(delta) -> void:
+	velocity.x = movePlayerVector.x * maxHorizontalSpeed
+	
+	if (movePlayerVector.y < 0 and is_on_floor()):
+		velocity.y = movePlayerVector.y * jumpSpeed
+	
+	velocity.y += gravity * delta
+	velocity = move_and_slide(velocity, Vector2.UP)
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _input(event):
+	movePlayerVector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	movePlayerVector.y = -1 if Input.is_action_just_pressed("jump") else 0
