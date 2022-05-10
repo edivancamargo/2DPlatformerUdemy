@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+onready var animatedSprite: AnimatedSprite = $AnimatedSprite
+
 var gravity: int = 1000
 var velocity: Vector2 = Vector2.ZERO
 var maxHorizontalSpeed: int = 140
@@ -27,7 +29,20 @@ func _process(delta) -> void:
 		velocity.y += gravity * delta
 
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	update_animation()
 
 func _input(event):
 	movePlayerVector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	movePlayerVector.y = -1 if Input.is_action_just_pressed("jump") else 0
+
+func update_animation() -> void:
+	if not is_on_floor():
+		animatedSprite.play("Jump")
+	elif movePlayerVector.x != 0:
+		animatedSprite.play("Run")
+	else:
+		animatedSprite.play("Idle")
+
+	if movePlayerVector.x != 0:
+		animatedSprite.flip_h = true if movePlayerVector.x > 0 else false
