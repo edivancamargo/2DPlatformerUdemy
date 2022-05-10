@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func _process(delta) -> void:
 	get_target_position()
-	global_position = lerp(targetPosition, global_position, pow(2, -15 * delta))
+	global_position = lerp(targetPosition, global_position, pow(2, -50 * delta))
 
 func get_target_position() -> Vector2:
 	if players.size() > 0:
