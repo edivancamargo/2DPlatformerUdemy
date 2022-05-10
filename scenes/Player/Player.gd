@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var animatedSprite: AnimatedSprite = $AnimatedSprite
+onready var coyoteTimer: Timer = $CoyoteTimer
 
 var gravity: int = 1000
 var velocity: Vector2 = Vector2.ZERO
@@ -20,7 +21,7 @@ func _process(delta) -> void:
 
 	velocity.x = clamp(velocity.x, -maxHorizontalSpeed, maxHorizontalSpeed)
 
-	if (movePlayerVector.y < 0 && is_on_floor()):
+	if (movePlayerVector.y < 0 && (is_on_floor() || !coyoteTimer.is_stopped())):
 		velocity.y = movePlayerVector.y * jumpSpeed
 
 	if (velocity.y < 0 and not Input.is_action_pressed("jump")):
@@ -28,7 +29,11 @@ func _process(delta) -> void:
 	else:
 		velocity.y += gravity * delta
 
+	var wasOnFloor = is_on_floor()
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	if wasOnFloor && !is_on_floor():
+		coyoteTimer.start()
 	
 	update_animation()
 
