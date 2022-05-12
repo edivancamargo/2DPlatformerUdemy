@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var animatedSprite: AnimatedSprite = $AnimatedSprite
 onready var coyoteTimer: Timer = $CoyoteTimer
+onready var hurtboxArea: Area2D = $HurtboxArea
 
 var gravity: int = 1000
 var velocity: Vector2 = Vector2.ZERO
@@ -11,6 +12,9 @@ var jumpSpeed: int = 360
 var jumpTerminationMultiplier: int = 4
 var movePlayerVector: Vector2 = Vector2.ZERO
 var hasDoubleJump: bool = false
+
+func _ready() -> void:
+	hurtboxArea.connect("area_entered", self, "on_hurtbox_area_entered")
 
 func _process(delta) -> void:
 	movePlayerVector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -58,3 +62,7 @@ func update_animation() -> void:
 
 	if movePlayerVector.x != 0:
 		animatedSprite.flip_h = true if movePlayerVector.x > 0 else false
+
+func on_hurtbox_area_entered(_area2d) -> void:
+	SignalServiceManager.emit_player_hurt(self)
+
