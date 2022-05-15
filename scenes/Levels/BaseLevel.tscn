@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/Enemy/EnemyGoal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Enemy/Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/GameCamera/GameCamera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Spikes/Spikes.tscn" type="PackedScene" id=6]
@@ -22,3 +24,38 @@ position = Vector2( -117, -67 )
 
 [node name="Spikes" parent="." instance=ExtResource( 6 )]
 position = Vector2( 21, -53 )
+
+[node name="Enemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 171, 56 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 21, 56 )
+
+[node name="EnemyGoal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 172, 56 )
+
+[node name="CollisionShape2D" parent="EnemyGoal/Area2D" index="0"]
+position = Vector2( -9, -9 )
+
+[node name="EnemyGoal3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 8, 57 )
+
+[node name="CollisionShape2D" parent="EnemyGoal3/Area2D" index="0"]
+position = Vector2( -8, -9 )
+
+[node name="EnemyGoal4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 116, 54 )
+
+[node name="CollisionShape2D" parent="EnemyGoal4/Area2D" index="0"]
+position = Vector2( -9, -9 )
+
+[node name="EnemyGoal2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 260, 56 )
+
+[node name="CollisionShape2D" parent="EnemyGoal2/Area2D" index="0"]
+position = Vector2( -9, -9 )
+
+[editable path="EnemyGoal"]
+[editable path="EnemyGoal3"]
+[editable path="EnemyGoal4"]
+[editable path="EnemyGoal2"]

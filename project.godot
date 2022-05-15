@@ -50,6 +50,7 @@ jump={
 
 [layer_names]
 
+2d_physics/layer_9="EnemyGoal"
 2d_physics/layer_10="Hurtbox"
 2d_physics/layer_16="Pickup"
 
