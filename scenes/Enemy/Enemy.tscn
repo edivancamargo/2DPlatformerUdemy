@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/enemies/character_0016.png" type="Texture" id=1]
 [ext_resource path="res://assets/enemies/character_0015.png" type="Texture" id=2]
@@ -12,11 +12,14 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 5.5, 6 )
+
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 5.5, 6 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 5.5, 6 )
+[sub_resource type="CircleShape2D" id=4]
+radius = 7.0
 
 [node name="Enemy" type="KinematicBody2D"]
 script = ExtResource( 3 )
@@ -25,17 +28,27 @@ script = ExtResource( 3 )
 position = Vector2( 0, -12 )
 frames = SubResource( 1 )
 animation = "Run"
+frame = 1
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( -0.5, -6 )
-shape = SubResource( 2 )
-
 [node name="GoalDetector" type="Area2D" parent="."]
+visible = false
 collision_layer = 256
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GoalDetector"]
 position = Vector2( 0, -6 )
 shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -0.5, -6 )
+shape = SubResource( 2 )
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 0, -8 )
+shape = SubResource( 4 )
