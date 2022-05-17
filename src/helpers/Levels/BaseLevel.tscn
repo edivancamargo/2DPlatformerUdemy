@@ -17,6 +17,8 @@ format = 1
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="EnemyGoals" type="Node2D" parent="Enemies"]
+
 [node name="Collectibles" type="Node2D" parent="."]
 
 [node name="Hazards" type="Node2D" parent="."]
