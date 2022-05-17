@@ -61,16 +61,18 @@ position = Vector2( 0, -8 )
 shape = SubResource( 1 )
 
 [node name="HurtboxArea" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, -7 )
-collision_layer = 512
-collision_mask = 512
+collision_layer = 1536
+collision_mask = 0
 
 [node name="HurtboxCollision" type="CollisionShape2D" parent="HurtboxArea"]
 shape = SubResource( 4 )
 
 [node name="DashArea" type="Area2D" parent="."]
 position = Vector2( 0, -11 )
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DashArea"]
 shape = SubResource( 5 )
+disabled = true

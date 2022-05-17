@@ -1,8 +1,11 @@
 extends KinematicBody2D
 
+export(int, LAYERS_2D_PHYSICS) var dashHurtboxMask
+
 onready var animatedSprite: AnimatedSprite = $AnimatedSprite
 onready var coyoteTimer: Timer = $CoyoteTimer
 onready var hurtboxArea: Area2D = $HurtboxArea
+onready var dashAreaCollision: CollisionShape2D = $DashArea/CollisionShape2D
 
 enum State { NORMAL, DASHING }
 var currentState = State.NORMAL
@@ -42,6 +45,9 @@ func get_movement_vector() -> Vector2:
 	return moveVector
 
 func handle_normal_state(delta) -> void:
+	if isStateNew:
+		dashAreaCollision.disabled = true
+	
 	movePlayerVector = get_movement_vector()
 	
 	velocity.x += movePlayerVector.x * horizontalAcceleration * delta
@@ -81,6 +87,7 @@ func handle_normal_state(delta) -> void:
 
 func handle_dash_state(delta) -> void:
 	if isStateNew:
+		dashAreaCollision.disabled = false
 		animatedSprite.play("Jump")
 		var move_vector = get_movement_vector()
 		var velocityMod = 1
