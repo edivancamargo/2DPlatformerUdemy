@@ -12,12 +12,13 @@ script = ExtResource( 7 )
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 18, 18 )
 format = 1
-tile_data = PoolIntArray( -196613, 1, 0, -196612, 1, 0, -196611, 1, 0, -196610, 1, 0, -196605, 1, 0, -131069, 1, 0, -131064, 1, 0, -65528, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0 )
 
 [node name="GameCamera" parent="." instance=ExtResource( 5 )]
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Collectibles" type="Node2D" parent="."]
+
+[node name="Hazards" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
