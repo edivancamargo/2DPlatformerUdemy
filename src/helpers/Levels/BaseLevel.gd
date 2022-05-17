@@ -1,6 +1,6 @@
 extends Node
 
-var playerScene = preload("res://scenes/Player/Player.tscn")
+var playerScene = preload("res://src/scenes/Player/Player.tscn")
 var spawnPosition = Vector2.ZERO
 onready var currentPlayer: KinematicBody2D = $Player
 var currentPlayerNode: KinematicBody2D = null
