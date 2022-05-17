@@ -17,10 +17,11 @@ var maxHorizontalSpeed: int = 140
 var maxDashSpeed: int = 500
 var minDashSpeed: int = 200
 var horizontalAcceleration: int = 2000
-var jumpSpeed: int = 360
+var jumpSpeed: int = 320
 var jumpTerminationMultiplier: int = 4
 var movePlayerVector: Vector2 = Vector2.ZERO
 var hasDoubleJump: bool = false
+var hasDash: bool = false
 
 func _ready() -> void:
 	hurtboxArea.connect("area_entered", self, "on_hurtbox_area_entered")
@@ -79,9 +80,11 @@ func handle_normal_state(delta) -> void:
 	
 	if is_on_floor():
 		hasDoubleJump = true
+		hasDash = true
 	
-	if Input.is_action_just_pressed("dash"):
+	if hasDash and Input.is_action_just_pressed("dash"):
 		call_deferred("change_state", State.DASHING)
+		hasDash = false
 	
 	update_animation()
 
