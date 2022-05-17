@@ -19,6 +19,6 @@ func create_player() -> void:
 	playerInstance.global_position = spawnPosition
 	register_player(playerInstance)
 
-func on_player_hurt(playerSignal) -> void:
+func on_player_hurt(_playerSignal) -> void:
 	currentPlayerNode.queue_free()
 	create_player()
