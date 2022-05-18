@@ -74,7 +74,7 @@ animations = [ {
 "speed": 7.0
 } ]
 
-[node name="Coin" type="Node2D"]
+[node name="Coin" type="Node2D" groups=["Coin"]]
 script = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -91,4 +91,5 @@ anims/Pickup = SubResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+frame = 1
 playing = true

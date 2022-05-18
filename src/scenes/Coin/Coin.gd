@@ -10,6 +10,7 @@ func _ready() -> void:
 func on_area_entered(_area2d):
 	animationPlayer.play("Pickup")
 	call_deferred("disable_pickup")
+	SignalServiceManager.emit_coin_collected()
 
 func disable_pickup() -> void:
 	area2DCollision.disabled = true
