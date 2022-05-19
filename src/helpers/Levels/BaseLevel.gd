@@ -21,12 +21,10 @@ func connect_default_signals() -> void:
 	
 func coin_collected() -> void:
 	collectedCoins += 1
-	print(str(totalCoins), " - ",str(collectedCoins))
 	SignalServiceManager.emit_total_coins_changed(totalCoins, collectedCoins)
 
 func set_totalCoins(newTotal: int) -> void:
 	totalCoins = newTotal
-	print("total coins: ", str(totalCoins))
 	SignalServiceManager.emit_total_coins_changed(totalCoins, collectedCoins)
 
 func register_player(player: KinematicBody2D) -> void:
