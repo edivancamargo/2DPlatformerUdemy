@@ -16,5 +16,4 @@ func emit_coin_collected() -> void:
 	emit_signal("coin_collected")
 
 func emit_total_coins_changed(totalCoins: int, collectedCoins: int) -> void:
-	print("emit total_coins_changed")
 	emit_signal("total_coins_changed", totalCoins, collectedCoins)
