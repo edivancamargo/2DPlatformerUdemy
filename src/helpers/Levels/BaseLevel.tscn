@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/resources/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://src/scenes/Flag/Flag.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/scenes/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/scenes/GameCamera/GameCamera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/helpers/Levels/BaseLevel.gd" type="Script" id=7]
+
+[sub_resource type="SegmentShape2D" id=1]
 
 [node name="BaseLevel" type="Node" groups=["Base_Level"]]
 script = ExtResource( 7 )
@@ -30,3 +32,12 @@ format = 1
 [node name="Player" parent="." instance=ExtResource( 4 )]
 
 [node name="Flag" parent="." instance=ExtResource( 2 )]
+
+[node name="BottomLevel" type="Area2D" parent="."]
+scale = Vector2( 20, 3 )
+collision_layer = 0
+collision_mask = 1024
+
+[node name="BottomCollision" type="CollisionShape2D" parent="BottomLevel"]
+rotation = 1.5708
+shape = SubResource( 1 )
