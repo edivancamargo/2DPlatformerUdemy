@@ -11,12 +11,13 @@ config_version=4
 [application]
 
 config/name="2DPlatformerUdemy"
-run/main_scene="res://src/scenes/Levels/Level_001.tscn"
+run/main_scene="res://src/scenes/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 SignalServiceManager="*res://src/services/SignalServiceManager.gd"
+LevelManager="*res://src/helpers/Levels/LevelManager.tscn"
 
 [display]
 
