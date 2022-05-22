@@ -12,8 +12,8 @@ func _ready() -> void:
 func _process(delta) -> void:
 #	This is not right, we shouldn't be calling get_tree().get_nodes_in_group for every frame...
 	acquire_target_position()
-	cameraPositionX = int(lerp(player.global_position.x, global_position.x, pow(2, -15 * delta)))
-	cameraPositionY = int(lerp(player.global_position.y, global_position.y, pow(2, -15 * delta)))
+	cameraPositionX = int(lerp(targetPosition.x, global_position.x, pow(2, -15 * delta)))
+	cameraPositionY = int(lerp(targetPosition.y, global_position.y, pow(2, -15 * delta)))
 	global_position = Vector2(cameraPositionX, cameraPositionY)
 
 func acquire_target_position() -> void:
