@@ -18,6 +18,7 @@ func _ready() -> void:
 func connect_default_signals() -> void:
 	SignalServiceManager.connect("player_hurt", self, "on_player_hurt", [], CONNECT_DEFERRED)
 	SignalServiceManager.connect("coin_collected", self, "coin_collected")
+	SignalServiceManager.connect("level_complete", self, "on_level_complete")
 	
 func coin_collected() -> void:
 	collectedCoins += 1
@@ -39,3 +40,6 @@ func create_player() -> void:
 func on_player_hurt(_playerSignal) -> void:
 	currentPlayerNode.queue_free()
 	create_player()
+
+func on_level_complete() -> void:
+	currentPlayerNode.queue_free()
