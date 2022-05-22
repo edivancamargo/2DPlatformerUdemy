@@ -1,11 +1,13 @@
 extends Node
 
 export(Array, PackedScene) var levelScenes
+var levelCompleteScene: PackedScene = preload("res://src/helpers/Levels/LevelComplete.tscn")
 
 var currentLevelIndex: int = 0
 
 func _ready() -> void:
-	SignalServiceManager.connect("level_cleared", self, "on_level_cleared")
+	SignalServiceManager.connect("level_complete", self, "on_level_complete")
+	SignalServiceManager.connect("start_next_level", self, "on_start_next_level")
 	change_level(currentLevelIndex)
 	
 func change_level(levelIndex: int) -> void:
@@ -17,5 +19,9 @@ func change_level(levelIndex: int) -> void:
 	else:
 		get_tree().change_scene(levelScenes[currentLevelIndex].resource_path)
 
-func on_level_cleared() -> void:
+func on_level_complete() -> void:
+	var levelComplete = levelCompleteScene.instance()
+	add_child(levelComplete)
+
+func on_start_next_level() -> void:
 	change_level(currentLevelIndex + 1)
