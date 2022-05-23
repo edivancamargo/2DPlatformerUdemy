@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var nextLevelBtn = $MarginContainer/VBoxContainer/Button
+onready var nextLevelBtn = $PanelContainer/MarginContainer/VBoxContainer/Button
 
 func _ready() -> void:
 	nextLevelBtn.connect("pressed", self, "on_next_level_pressed")
