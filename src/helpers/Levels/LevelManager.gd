@@ -8,7 +8,6 @@ var currentLevelIndex: int = 0
 func _ready() -> void:
 	SignalServiceManager.connect("level_complete", self, "on_level_complete")
 	SignalServiceManager.connect("start_next_level", self, "on_start_next_level")
-	change_level(currentLevelIndex)
 	
 func change_level(levelIndex: int) -> void:
 	currentLevelIndex = levelIndex
