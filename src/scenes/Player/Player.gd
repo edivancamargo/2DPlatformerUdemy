@@ -63,6 +63,7 @@ func handle_normal_state(delta) -> void:
 		velocity.y = movePlayerVector.y * jumpSpeed
 		
 		if !is_on_floor() && coyoteTimer.is_stopped():
+			SignalServiceManager.emit_apply_camera_shake(1.25)
 			hasDoubleJump = false
 			
 		coyoteTimer.stop()
@@ -90,6 +91,8 @@ func handle_normal_state(delta) -> void:
 
 func handle_dash_state(delta) -> void:
 	if isStateNew:
+		SignalServiceManager.emit_apply_camera_shake(2.75)
+		
 		dashAreaCollision.disabled = false
 		animatedSprite.play("Jump")
 		var move_vector = get_movement_vector()
@@ -120,5 +123,6 @@ func update_animation() -> void:
 		animatedSprite.flip_h = true if movePlayerVector.x > 0 else false
 
 func on_hurtbox_area_entered(_area2d) -> void:
+	SignalServiceManager.emit_apply_camera_shake(3.25)
 	SignalServiceManager.emit_player_hurt(self)
 
