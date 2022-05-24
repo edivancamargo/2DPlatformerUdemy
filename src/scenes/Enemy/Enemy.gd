@@ -32,4 +32,5 @@ func on_goal_entered(_area2D: Area2D) -> void:
 	direction *= -1
 
 func on_hurtbox_entered(_area2D: Area2D) -> void:
+	SignalServiceManager.emit_apply_camera_shake(2.25)
 	queue_free()
