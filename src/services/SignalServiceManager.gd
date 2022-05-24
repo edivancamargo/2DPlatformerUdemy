@@ -6,6 +6,7 @@ signal total_coins_changed
 signal level_complete
 signal start_next_level
 signal all_levels_cleared
+signal apply_camera_shake
 
 func emit_player_hurt(player: KinematicBody2D) -> void:
 	emit_signal("player_hurt", player)
@@ -25,3 +26,6 @@ func emit_start_next_level() -> void:
 func emit_all_levels_cleared() -> void:
 	print("You have finished all levels, congratulations!")
 	emit_signal("all_levels_cleared")
+
+func emit_apply_camera_shake(percentage: float):
+	emit_signal("apply_camera_shake", percentage)
