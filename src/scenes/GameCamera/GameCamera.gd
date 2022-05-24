@@ -13,12 +13,13 @@ var yNoiseVector := Vector2.DOWN
 var xNoisePosition := Vector2.ZERO
 var yNoisePosition := Vector2.ZERO
 var noiseTravelRate: int = 500
-var maxShakeOffset: int = 4
+var maxShakeOffset: int = 10
 var currentShakePercentage: float = 0
-var shakeDecay: int = 4
+var shakeDecay: int = 3
 
 func _ready() -> void:
 	VisualServer.set_default_clear_color(backgroundColor)
+	SignalServiceManager.connect("apply_camera_shake", self, "on_apply_camera_shake")
 
 func _process(delta) -> void:
 #	This is not right, we shouldn't be calling get_tree().get_nodes_in_group for every frame...
@@ -44,5 +45,5 @@ func acquire_target_position() -> void:
 		player = players[0]
 		targetPosition = player.global_position
 
-func apply_shake(percentage: int) -> void:
+func on_apply_camera_shake(percentage: float) -> void:
 	currentShakePercentage = clamp(currentShakePercentage + percentage, 0, 1)
