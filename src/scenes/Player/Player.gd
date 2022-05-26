@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 export(int, LAYERS_2D_PHYSICS) var dashHurtboxMask
 
+onready var playerDeath = preload("res://src/scenes/Player/PlayerDeath.tscn")
+
 onready var animatedSprite: AnimatedSprite = $AnimatedSprite
 onready var coyoteTimer: Timer = $CoyoteTimer
 onready var hurtboxArea: Area2D = $HurtboxArea
@@ -122,7 +124,13 @@ func update_animation() -> void:
 	if movePlayerVector.x != 0:
 		animatedSprite.flip_h = true if movePlayerVector.x > 0 else false
 
-func on_hurtbox_area_entered(_area2d) -> void:
-	SignalServiceManager.emit_apply_camera_shake(3.25)
+func kill() -> void:
+	var playerDeathInstance = playerDeath.instance()
+	get_parent().add_child_below_node(self, playerDeathInstance)
+	playerDeathInstance.global_position = global_position
+	playerDeathInstance.velocity = velocity
 	SignalServiceManager.emit_player_hurt(self)
 
+func on_hurtbox_area_entered(_area2d) -> void:
+	SignalServiceManager.emit_apply_camera_shake(3.25)
+	call_deferred("kill")
