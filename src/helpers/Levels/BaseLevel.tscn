@@ -29,7 +29,9 @@ format = 1
 
 [node name="Hazards" type="Node2D" parent="."]
 
-[node name="Player" parent="." instance=ExtResource( 4 )]
+[node name="PlayerRoot" type="Node2D" parent="."]
+
+[node name="Player" parent="PlayerRoot" instance=ExtResource( 4 )]
 
 [node name="Flag" parent="." instance=ExtResource( 2 )]
 

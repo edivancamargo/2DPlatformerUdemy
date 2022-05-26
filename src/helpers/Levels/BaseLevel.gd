@@ -2,7 +2,8 @@ extends Node
 
 var playerScene = preload("res://src/scenes/Player/Player.tscn")
 
-onready var currentPlayer: KinematicBody2D = $Player
+onready var playerRoot: Node2D = $PlayerRoot
+onready var currentPlayer: KinematicBody2D = $PlayerRoot/Player
 
 var spawnPosition = Vector2.ZERO
 var currentPlayerNode: KinematicBody2D = null
@@ -33,12 +34,15 @@ func register_player(player: KinematicBody2D) -> void:
 
 func create_player() -> void:
 	var playerInstance = playerScene.instance()
-	add_child_below_node(currentPlayerNode, playerInstance)
+	playerRoot.add_child(playerInstance)
 	playerInstance.global_position = spawnPosition
 	register_player(playerInstance)
 
 func on_player_hurt(_playerSignal) -> void:
 	currentPlayerNode.queue_free()
+	var timer = get_tree().create_timer(1)
+	yield(timer, "timeout")
+	
 	create_player()
 
 func on_level_complete() -> void:
