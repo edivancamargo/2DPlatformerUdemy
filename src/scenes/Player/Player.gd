@@ -24,6 +24,7 @@ var jumpTerminationMultiplier: int = 4
 var movePlayerVector: Vector2 = Vector2.ZERO
 var hasDoubleJump: bool = false
 var hasDash: bool = false
+var isDying: bool = false
 
 func _ready() -> void:
 	hurtboxArea.connect("area_entered", self, "on_hurtbox_area_entered")
@@ -125,10 +126,14 @@ func update_animation() -> void:
 		animatedSprite.flip_h = true if movePlayerVector.x > 0 else false
 
 func kill() -> void:
+	if isDying:
+		return
+			
+	isDying = true
 	var playerDeathInstance = playerDeath.instance()
+	playerDeathInstance.velocity = velocity
 	get_parent().add_child_below_node(self, playerDeathInstance)
 	playerDeathInstance.global_position = global_position
-	playerDeathInstance.velocity = velocity
 	SignalServiceManager.emit_player_hurt(self)
 
 func on_hurtbox_area_entered(_area2d) -> void:
