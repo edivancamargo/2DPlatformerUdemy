@@ -37,6 +37,12 @@ func kill() -> void:
 	var deathInstance = enemyDeathScene.instance()
 	get_parent().add_child(deathInstance)
 	deathInstance.global_position = global_position
+	
+#	If travelling to the right
+	if velocity.x > 0:
+#		Flip the sprite to the correct side.
+		deathInstance.scale = Vector2(-1, 1)
+	
 	queue_free()
 
 func on_hurtbox_entered(_area2D: Area2D) -> void:
