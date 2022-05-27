@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var enemyDeathScene = preload("res://src/scenes/Enemy/EnemyDeath.tscn")
+
 enum Direction {RIGHT, LEFT}
 export(Direction) var initialDirection
 
@@ -31,6 +33,12 @@ func set_enemy_direction() -> void:
 func on_goal_entered(_area2D: Area2D) -> void:
 	direction *= -1
 
+func kill() -> void:
+	var deathInstance = enemyDeathScene.instance()
+	get_parent().add_child(deathInstance)
+	deathInstance.global_position = global_position
+	queue_free()
+
 func on_hurtbox_entered(_area2D: Area2D) -> void:
 	SignalServiceManager.emit_apply_camera_shake(2.25)
-	queue_free()
+	call_deferred("kill")
