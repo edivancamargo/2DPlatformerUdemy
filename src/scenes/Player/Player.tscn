@@ -72,6 +72,7 @@ one_shot = true
 show_behind_parent = true
 material = SubResource( 7 )
 position = Vector2( 0, -12 )
+emitting = false
 amount = 15
 lifetime = 0.4
 local_coords = false

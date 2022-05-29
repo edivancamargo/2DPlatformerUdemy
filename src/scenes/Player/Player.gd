@@ -8,6 +8,7 @@ onready var animatedSprite: AnimatedSprite = $AnimatedSprite
 onready var coyoteTimer: Timer = $CoyoteTimer
 onready var hurtboxArea: Area2D = $HurtboxArea
 onready var dashAreaCollision: CollisionShape2D = $DashArea/CollisionShape2D
+onready var dashTrailParticles: Particles2D = $DashParticles
 
 enum State { NORMAL, DASHING }
 var currentState = State.NORMAL
@@ -50,6 +51,7 @@ func get_movement_vector() -> Vector2:
 
 func handle_normal_state(delta) -> void:
 	if isStateNew:
+		dashTrailParticles.emitting = false
 		dashAreaCollision.disabled = true
 	
 	movePlayerVector = get_movement_vector()
@@ -94,6 +96,7 @@ func handle_normal_state(delta) -> void:
 
 func handle_dash_state(delta) -> void:
 	if isStateNew:
+		dashTrailParticles.emitting = true
 		SignalServiceManager.emit_apply_camera_shake(2.75)
 		
 		dashAreaCollision.disabled = false
