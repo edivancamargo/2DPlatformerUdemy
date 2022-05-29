@@ -1,8 +1,35 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/scenes/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/character_0000.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/character_0001.png" type="Texture" id=3]
+
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+
+uniform vec4 baseColor : hint_color;
+
+void fragment() {
+	vec4 textColor = texture(TEXTURE, UV);
+	COLOR.rgba = vec4(baseColor.r, baseColor.g, baseColor.b, textColor.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 8 )
+shader_param/baseColor = Color( 0.423529, 0.796078, 0.580392, 1 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.242, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 10 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -40,6 +67,16 @@ script = ExtResource( 1 )
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
+
+[node name="DashParticles" type="Particles2D" parent="."]
+show_behind_parent = true
+material = SubResource( 7 )
+position = Vector2( 0, -12 )
+amount = 15
+lifetime = 0.4
+local_coords = false
+process_material = SubResource( 6 )
+texture = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
